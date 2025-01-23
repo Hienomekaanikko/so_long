@@ -4,6 +4,10 @@ NAME = so_long
 # DIRECTORIES
 SRC_DIR = src
 INCLUDES = includes
+MLX42_DIR = $(SRC_DIR)/MLX42
+MLX_INCLUDES = $(MLX42_DIR)/include
+HEADERS = $(INCLUDES) $(MLX_INCLUDES)
+LIBS = $(MLX42_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 OBJ_DIR = objs
 LIBFT_DIR = $(SRC_DIR)/libft
 FT_PRINTF_DIR = $(SRC_DIR)/ft_printf
@@ -81,13 +85,16 @@ DEPS = $(OBJS:.o=.d)
 CC = cc
 RM = rm -rf
 CFLGS = -Wall -Werror -Wextra
-IFLGS = -I$(INCLUDES)
+IFLGS = -I$(INCLUDES) -I$(MLX_INCLUDES)
 
 # RULES
 .PHONY: all clean fclean re
 
 # Default target
-all: $(NAME)
+all: libmlx $(NAME)
+
+libmlx:
+	@cmake $(MLX42_DIR) -B $(MLX42_DIR)/build && make -C $(MLX42_DIR)/build -j4
 
 # Object file rule
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -96,11 +103,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 # Create the executable
 $(NAME): $(OBJS)
-	$(CC) $(CFLGS) -o $(NAME) $(OBJS) $(IFLGS)
+	$(CC) $(CFLGS) -o $(NAME) $(OBJS) $(IFLGS) $(LIBS)
 
 # Clean object files
 clean:
 	$(RM) $(OBJ_DIR)
+	$(RM) $(MLX42_DIR)/build
 
 # Clean everything (object files and executable)
 fclean: clean
