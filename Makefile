@@ -41,19 +41,9 @@ LIBFT_FLS = $(LIBFT_DIR)/ft_calloc.c \
 			$(LIBFT_DIR)/ft_substr.c \
 			$(LIBFT_DIR)/ft_strjoin.c \
 			$(LIBFT_DIR)/ft_strtrim.c \
-			$(LIBFT_DIR)/ft_split.c \
-			$(LIBFT_DIR)/ft_putchar_fd.c \
-			$(LIBFT_DIR)/ft_putstr_fd.c \
-			$(LIBFT_DIR)/ft_putendl_fd.c \
-			$(LIBFT_DIR)/ft_putnbr_fd.c \
-			$(LIBFT_DIR)/ft_itoa.c \
-			$(LIBFT_DIR)/ft_strlcat.c \
-			$(LIBFT_DIR)/ft_lstnew.c \
-			$(LIBFT_DIR)/ft_lstdelone.c \
-			$(LIBFT_DIR)/ft_lstiter.c \
-			$(LIBFT_DIR)/ft_lstmap.c \
 			$(LIBFT_DIR)/ft_lstadd_back.c \
 			$(LIBFT_DIR)/ft_lstadd_front.c \
+			$(LIBFT_DIR)/ft_lstdelone.c \
 			$(LIBFT_DIR)/ft_lstclear.c \
 			$(LIBFT_DIR)/ft_lstlast.c \
 			$(LIBFT_DIR)/ft_lstsize.c \

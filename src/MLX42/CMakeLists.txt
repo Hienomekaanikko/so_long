@@ -38,7 +38,6 @@ if(UNIX AND NOT EMSCRIPTEN)
 	add_compile_options(
 		-Wextra
 		-Wall
-		-Werror
 		-Wunreachable-code
 
 		# Some low priority warnings that are annoying.

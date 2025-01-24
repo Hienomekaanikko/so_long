@@ -6,40 +6,60 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:41:40 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/23 12:30:35 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/24 16:37:36 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 #define	SO_LONG_H
 
-#include <stdlib.h>
-#include <unistd.h>
 #include "libft.h"
-#include "ft_printf.h"
 #include "get_next_line.h"
+#include <fcntl.h>
 #include "MLX42/MLX42.h"
 
-void	pb(t_list **stack_a, t_list **stack_b);
-void	pa(t_list **stack_a, t_list **stack_b);
-void	sa(t_list **stack_a);
-void	sb(t_list **stack_b);
-void	ra(t_list **stack_a);
-void	rb(t_list **stack_b);
-void	rra(t_list **stack_b);
-void	rrb(t_list **stack_b);
-void	add_targets(t_list **stack_a, t_list **stack_b);
-void	count_cost(t_list **stack_a, t_list **stack_b);
-void	long_sort(t_list **stack_a, t_list **stack_b);
-void	rotate_max_on_top(t_list **stack);
-int		highest(t_list **stack);
-int		lowest(t_list **stack);
-void	empty_b_to_a(t_list	**stack_a, t_list **stack_b);
-void	rrr(t_list **stack_a, t_list **stack_b);
-void	rr(t_list **stack_a, t_list **stack_b);
-void	short_sort(t_list **stack_a);
-int		error_check(t_list	**stack_a);
-void	add_index(t_list **stack_a, t_list **stack_b);
-void	free_stack(t_list **stack);
+#define WALL_SIZE 190
+#define TILE_SIZE 200
+#define MAX_MAP_WIDTH 2000
+#define MAX_MAP_HEIGHT 2000
+
+#define GROUND_IMG "contents/ground.png"
+#define	PLAYER_IMG "contents/player.png"
+#define WALL_IMG "contents/wall.png"
+#define COLLECTABLE_IMG "contents/collectable.png"
+#define EXIT_IMG "contents/exit.png"
+
+typedef struct s_player
+{
+	int	*pos_y;
+	int	*pos_x;
+} t_player;
+
+typedef struct s_map
+{
+	char	map[MAX_MAP_HEIGHT][MAX_MAP_WIDTH];
+	int		width;
+	int		height;
+} t_map;
+
+typedef struct s_textures
+{
+	mlx_texture_t*	wall;
+	mlx_texture_t*	ground;
+	mlx_texture_t*	player;
+	mlx_texture_t*	collectable;
+	mlx_texture_t*	exit;
+	mlx_texture_t*	empty_space;
+} t_textures;
+
+typedef struct s_images
+{
+	mlx_image_t*	wall;
+	mlx_image_t*	ground;
+	mlx_image_t*	player;
+	mlx_image_t*	collectable;
+	mlx_image_t*	exit;
+	mlx_image_t*	empty_space;
+} t_images;
 
 #endif
