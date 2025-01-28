@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:59:54 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/27 17:33:59 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/28 09:52:04 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ int collect(t_game *game)
 		else
 			printf("%d pints collected!\n", game->player.collectables);
 		mlx_image_to_window(game->mlx, game->images.ground, x * TILE_SIZE, y * TILE_SIZE);
+		game->map.map[y][x] = '0';
 		return (1);
 	}
 	return (0);
@@ -204,15 +205,14 @@ int collect(t_game *game)
 
 //add the need condition to check if currently positioned at exit too
 
-int	exit_game(t_game *game)
+void	exit_game(t_game *game)
 {
 	if (game->map.total_collectables == 0)
 	{
 		printf("You finished the game! Total points: %d.\n", game->player.collectables);
 		mlx_close_window(game->mlx);
-		return (1);
 	}
-	return (0);
+	return ;
 }
 
 void direction(int old_x, t_game *game)
@@ -236,13 +236,25 @@ void key_hook(mlx_key_data_t keydata, void* param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(game->mlx);
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS && valid_move_down(game))
-		game->player.pos_y++;
+	{
+		game->player.pos_y++ && game->player.movements++;
+		printf("Total movements: %d\n", game->player.movements);
+	}
 	else if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS && valid_move_up(game))
-		game->player.pos_y--;
+	{
+		game->player.pos_y-- && game->player.movements++;
+		printf("Total movements: %d\n", game->player.movements);
+	}
 	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS && valid_move_left(game))
-		game->player.pos_x--;
+	{
+		game->player.pos_x-- && game->player.movements++;
+		printf("Total movements: %d\n", game->player.movements);
+	}
 	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS && valid_move_right(game))
-		game->player.pos_x++;
+	{
+		game->player.pos_x++ && game->player.movements++;
+		printf("Total movements: %d\n", game->player.movements);
+	}
 	else
 	{
 		game->player.pos_x = old_x;
@@ -252,12 +264,16 @@ void key_hook(mlx_key_data_t keydata, void* param)
 	{
 		collect(game);
 		direction(old_x, game);
-		mlx_image_to_window(game->mlx, game->images.ground, old_x * TILE_SIZE, old_y * TILE_SIZE);
+		if (game->player.pos_x == game->exit.pos_x && game->player.pos_y == game->exit.pos_y)
+			exit_game(game);
+		if (old_x == game->exit.pos_x && old_y == game->exit.pos_y)
+			mlx_image_to_window(game->mlx, game->images.exit, old_x * TILE_SIZE, old_y * TILE_SIZE);
+		else
+			mlx_image_to_window(game->mlx, game->images.ground, old_x * TILE_SIZE, old_y * TILE_SIZE);
 		if (game->player.direction == 1)
 			mlx_image_to_window(game->mlx, game->images.player_right, game->player.pos_x * TILE_SIZE, game->player.pos_y * TILE_SIZE);
 		else if (game->player.direction == 0)
 			mlx_image_to_window(game->mlx, game->images.player_left, game->player.pos_x * TILE_SIZE, game->player.pos_y * TILE_SIZE);
-		exit_game(game);
 	}
 }
 
@@ -265,7 +281,6 @@ void	run_game(t_game *game)
 {
 	mlx_key_hook(game->mlx, &key_hook, game);
 	mlx_loop(game->mlx);
-	mlx_terminate(game->mlx);
 }
 
 int	main(int argc, char **argv)
@@ -276,6 +291,7 @@ int	main(int argc, char **argv)
 		return (1);
 	game.player.collectables = 0;
 	game.map.total_collectables = 0;
+	game.player.movements = 0;
 	read_map(argv[1], &game);
 	game.mlx = mlx_init(game.map.width * TILE_SIZE, game.map.height * TILE_SIZE, "So Long", false);
 	if (!game.mlx)
@@ -284,5 +300,6 @@ int	main(int argc, char **argv)
 	load_textures(&game);
 	render_map(&game);
 	run_game(&game);
+	mlx_terminate(game.mlx);
 	return (0);
 }

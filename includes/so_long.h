@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:41:40 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/27 17:02:29 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/28 09:28:09 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_player
 	int	pos_x;
 	int	collectables;
 	int	direction;
+	int	movements;
 } t_player;
 
 typedef struct s_exit
