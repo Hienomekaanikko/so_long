@@ -42,12 +42,15 @@ LIBFT_FLS = $(LIBFT_DIR)/ft_calloc.c \
 			$(LIBFT_DIR)/ft_strjoin.c \
 			$(LIBFT_DIR)/ft_strtrim.c \
 			$(LIBFT_DIR)/ft_lstadd_back.c \
+			$(LIBFT_DIR)/ft_putendl_fd.c \
 			$(LIBFT_DIR)/ft_lstadd_front.c \
 			$(LIBFT_DIR)/ft_lstdelone.c \
+			$(LIBFT_DIR)/ft_split.c \
 			$(LIBFT_DIR)/ft_lstclear.c \
 			$(LIBFT_DIR)/ft_lstlast.c \
 			$(LIBFT_DIR)/ft_lstsize.c \
-			$(LIBFT_DIR)/ft_putstr.c
+			$(LIBFT_DIR)/ft_putstr.c \
+			$(LIBFT_DIR)/ft_free_split.c
 
 
 FT_PRINTF_FLS = $(FT_PRINTF_DIR)/ft_itoalen.c \
@@ -60,7 +63,17 @@ FT_PRINTF_FLS = $(FT_PRINTF_DIR)/ft_itoalen.c \
 
 GNL_FLS = $(GNL_DIR)/get_next_line.c \
 
-SO_LONG_FLS = $(SO_LONG_DIR)/so_long.c \
+SO_LONG_FLS = $(SO_LONG_DIR)/main.c \
+				$(SO_LONG_DIR)/init_move.c \
+				$(SO_LONG_DIR)/init_setup.c \
+				$(SO_LONG_DIR)/init_imgs.c \
+				$(SO_LONG_DIR)/map.c \
+				$(SO_LONG_DIR)/game_status.c \
+				$(SO_LONG_DIR)/map_access.c \
+				$(SO_LONG_DIR)/validate_map.c \
+				$(SO_LONG_DIR)/validate_move.c \
+				$(SO_LONG_DIR)/utils.c \
+
 
 # ALL SOURCE FILES
 SRC_FILES = $(LIBFT_FLS) $(FT_PRINTF_FLS) $(GNL_FLS) $(SO_LONG_FLS)

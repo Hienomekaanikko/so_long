@@ -6,17 +6,15 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:43:38 by msuokas           #+#    #+#             */
-/*   Updated: 2024/12/05 11:08:18 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/03 12:46:28 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <unistd.h>
+# include "libft.h"
 # include <stdarg.h>
-# include <stdlib.h>
-# include <stdint.h>
 
 int		ft_printf(const char *str, ...);
 char	*ft_itoalen(int n);
